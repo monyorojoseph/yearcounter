@@ -7,10 +7,10 @@
   <script src="https://unpkg.com/htmx.org@2.0.0" 
     integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" 
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script> 
 
 </head>
-<body>
-    <div id="index_data" hx-get="/index_data" hx-swap="innerHTML" hx-trigger="load"></div>
-</body>
+<body class="h-screen container mx-auto" id="index_data" 
+  hx-get="/index_data" hx-swap="innerHTML" hx-trigger="load"></body>
 </html>

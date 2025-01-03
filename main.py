@@ -38,6 +38,9 @@ def update_days(request: Request, value: str):
     if value == "rd":
         routine_days = routine_days + 1
     data = { "learning_days": learning_days, "routine_days": routine_days }
+    td = datetime.now()
+    data['day_number']= datetime(td.year, td.month, td.day).timetuple().tm_mday
+    data['year'] = td.year
      
     return templates.TemplateResponse(
             request=request, name="index_data.html", context={"data": data}
