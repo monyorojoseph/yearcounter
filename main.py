@@ -2,25 +2,15 @@ from datetime import datetime, date
 from typing import Annotated, Union
 
 from fastapi import Depends, FastAPI, Request, Header, HTTPException
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.encoders import jsonable_encoder
 
-from sqlmodel import Field, Session, SQLModel, create_engine, select
+from sqlmodel import Session, SQLModel, select
 
-class Track(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    year: str = Field(index=True)
-    updated: date = Field()
-    current_count: int = Field()
-    type: str = Field()  # 'ld' or 'rd'
+from databse import engine
+from models import Track
 
-sqlite_file_name = "database.db"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
-
-connect_args = {"check_same_thread": False}
-engine = create_engine(sqlite_url, connect_args=connect_args)
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
