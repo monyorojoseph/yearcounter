@@ -1,0 +1,12 @@
+<p>Day {{data.day_number}} of {{data.year}}</p>
+<div>
+    <span><p>Routine days {{data.routine_days}}</p></span>
+   <span><button hx-put="update_days/rd" hx-target="#index_data" 
+        hx-swap="innerHTML" hx-trigger="click"> + </button></span>
+</div>
+<div>
+    <span><p>Learning days {{data.learning_days}}</p></span>
+    <span><button hx-put="update_days/ld" hx-target="#index_data" 
+        hx-swap="innerHTML" hx-trigger="click"> + </button></span>
+
+</div>
