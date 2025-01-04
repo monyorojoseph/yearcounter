@@ -1,26 +1,22 @@
 import time
 from datetime import datetime, date
 from typing import Annotated, Union
+from logging import getLogger, INFO, basicConfig
 
-from fastapi import Depends, FastAPI, Request, Header, HTTPException
+from fastapi import FastAPI, Request, Header, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.encoders import jsonable_encoder
 
-from sqlmodel import Session, SQLModel, select
+from sqlmodel import Session, select
 
-from databse import engine
+from databse import SessionDep
 from models import Track
 
+logger = getLogger(__name__)
+basicConfig(level=INFO)
 
-def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
 
-def get_session():
-    with Session(engine) as session:
-        yield session
-
-SessionDep = Annotated[Session, Depends(get_session)]
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -47,10 +43,6 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         status_code=exc.status_code,
         content={"detail": exc.detail}
     )
-
-@app.on_event("startup")
-async def startup():
-    create_db_and_tables()
 
 def initialize_year(session: Session, year: str):
     """Initialize records for a new year if they don't exist."""
@@ -132,7 +124,6 @@ def index_data(
             context={"data": data}
         )
     return JSONResponse(content=jsonable_encoder(data))
-
 
 @app.put("/update_days/{value}", response_class=HTMLResponse)
 def update_days(request: Request, session: SessionDep, value: str):
