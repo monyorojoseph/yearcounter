@@ -16,10 +16,8 @@ from models import Track
 logger = getLogger(__name__)
 basicConfig(level=INFO)
 
-
-
 app = FastAPI()
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="templates")
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
