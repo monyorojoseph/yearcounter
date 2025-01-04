@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year Counter</title>
+  <script src="https://unpkg.com/htmx.org@2.0.0" 
+    integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" 
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script> 
+  
+  <style>
+    #toast-container {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .toast {
+        position: relative;
+        margin: 0;
+    }
+</style>
+
+</head>
+<body class="h-screen container mx-auto">
+  <div id="toast-container"></div>
+  <div id="index_data" 
+       hx-get="/index_data" 
+       hx-swap="innerHTML" 
+       hx-trigger="load"
+       hx-ext="json-enc"></div>
+</body>
+</html>
