@@ -10,7 +10,7 @@ from fastapi.encoders import jsonable_encoder
 
 from sqlmodel import Session, select
 
-from databse import SessionDep
+from db import SessionDep
 from models import Track
 
 logger = getLogger(__name__)
@@ -19,7 +19,7 @@ basicConfig(level=INFO)
 
 
 app = FastAPI()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="app/templates")
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
