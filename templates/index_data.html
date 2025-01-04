@@ -5,15 +5,26 @@
     <div class="flex flex-row items-center justify-start space-x-3">
         <span><p>Routine days {{data.routine_days}}</p></span>
         <span class="cursor-pointer text-xl font-semibold"
-            hx-put="update_days/rd" hx-target="#index_data" 
-            hx-swap="innerHTML" hx-trigger="click"> + </span>
+            hx-put="update_days/rd" 
+            hx-target="#index_data" 
+            hx-swap="innerHTML" 
+            hx-trigger="click"
+            hx-on::after-request="if(event.detail.failed) {
+                const container = document.getElementById('toast-container');
+                container.innerHTML += event.detail.xhr.response;
+            }"> + </span>
     </div>
     <div class="flex flex-row items-center justify-start space-x-3">
         <span><p>Learning days {{data.learning_days}}</p></span>
         <span class="cursor-pointer text-xl font-semibold" 
-            hx-put="update_days/ld" hx-target="#index_data" 
-            hx-swap="innerHTML" hx-trigger="click"> + </span>
-
+            hx-put="update_days/ld" 
+            hx-target="#index_data" 
+            hx-swap="innerHTML" 
+            hx-trigger="click"
+            hx-on::after-request="if(event.detail.failed) {
+                const container = document.getElementById('toast-container');
+                container.innerHTML += event.detail.xhr.response;
+            }"> + </span>
     </div>
 </main>
 <footer class="text-center">
