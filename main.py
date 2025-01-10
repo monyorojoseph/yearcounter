@@ -25,7 +25,7 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         return HTMLResponse(
             content=f"""
             <div id="error-toast-{int(time.time() * 1000)}" 
-                 class="toast toast-top toast-end text-sm font-semibold"
+                 class="toast toast-top toast-end text-sm font-semibold w-28"
                  hx-trigger="load delay:3s"
                  hx-remove>
                 <div class="alert alert-error flex justify-between">
